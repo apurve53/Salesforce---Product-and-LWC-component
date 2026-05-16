@@ -1,0 +1,42 @@
+/* Center-screen layout containing a structural 30% boundary configuration */
+.custom-modal-container {
+    top: 30%;
+    bottom: 30%;
+    left: 30%;
+    right: 30%;
+    z-index: 9002;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+    /* Animation implementation */
+    animation: smoothFadeIn 0.4s ease-out forwards;
+}
+
+/* Scroll handling setup to manage lengthy string lists gracefully */
+.custom-scrollable-list {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+/* Shared Fade In Keyframe Definition */
+@keyframes smoothFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Backdrop Fade Configuration hook overrides */
+.custom-fade-in {
+    animation: backdropFade 0.3s ease-out forwards;
+}
+
+@keyframes backdropFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

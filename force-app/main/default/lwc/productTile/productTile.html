@@ -1,0 +1,74 @@
+<template>
+	<lightning-card title={product.name} data-id={product.id} onclick={handleNavigate}>
+		<lightning-button label="Add" data-id={product.id} onclick={handleAddToCart} slot="actions"></lightning-button>
+		<p class="slds-var-p-horizontal_small">
+			<lightning-carousel>
+				<template lwc:if={product.isImages}>
+					<template for:each={product.imageUrl} for:item="img">
+						<lightning-carousel-image
+							onclick={stopPropogation}
+							key={img.key}
+							src={img.value}
+							header="First card"
+							description={product.description}
+							alternative-text="This is a card"
+							href={productUrl}
+							>
+						</lightning-carousel-image>
+					</template>
+				</template>
+				<template lwc:else>
+					<lightning-carousel-image
+						src={defaultImg}
+						header="First card"
+						description={product.description}
+						alternative-text="This is a card"
+						href={productUrl}
+						>
+					</lightning-carousel-image>
+				</template>
+			</lightning-carousel>
+		</p>
+			<p> {product.name} anddd </p>
+			<div class="slds-var-p-around_medium slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+				<!-- Left Side: Like & Dislike -->
+				<div>
+					<lightning-button-icon-stateful
+						data-id={product.id}
+						icon-name="utility:like"
+						alternative-text="Like"
+						selected={isLiked}
+						onclick={handleLikeDislike}
+						class="slds-var-m-right_x-small"
+						title="Like">
+					</lightning-button-icon-stateful>
+			
+					<lightning-button-icon-stateful
+						data-id={product.id}
+						icon-name="utility:dislike"
+						alternative-text="Dislike"
+						selected={isDisliked}
+						onclick={handleLikeDislike}
+						title="Dislike">
+					</lightning-button-icon-stateful>
+				</div>
+			
+				<!-- Right Side: Share -->
+				<div>
+					<lightning-button 
+						label="Share" 
+						variant="neutral"
+						icon-name="utility:share" 
+						onclick={handleNativeShare}>
+					</lightning-button>
+				</div>
+			</div>
+		<p slot="footer">Price: ₹{product.price}</p>
+	</lightning-card>
+
+	<!-- <c-to-share-collect-emails onlikedislike={handleDispatch} products={products}></c-to-share-collect-emails> -->
+	 <template if:true={isModalOpen}>
+		 <c-to-share-collect-emails product={product} onopenorclose={handleShareModelclose}></c-to-share-collect-emails>
+	 </template>
+	
+</template>

@@ -1,0 +1,66 @@
+<template>
+    <!-- Background Backdrop Overlay (Fades In) -->
+    <div class="slds-backdrop slds-backdrop_open custom-fade-in">
+        <!-- Target Content Modal Wrapper (Centered, Custom Insets) -->
+        <div class="custom-modal-container slds-var-p-around_large slds-is-fixed slds-grid slds-list_horizontal slds-grid_vertical slds-grid_align-spread">
+            <!-- Email Input Grid Layout Area -->
+            <div class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                <div class="slds-col slds-size_3-of-4">
+                    <lightning-input
+                        type="email"
+                        label="To Address"
+                        value={emailInput}
+                        onchange={handleChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                    <lightning-button
+                        label="Add"
+                        variant="brand"
+                        onclick={handleAdd}
+                        class="slds-size_full">
+                    </lightning-button>
+                </div>
+            </div>
+            <!-- Scrollable Dynamic Email Tag List Container -->
+            <template if:true={hasEmails}>
+                <div class="slds-var-m-top_medium slds-grow custom-scrollable-list">
+                    <template for:each={emailList} for:item="emailItem" for:index="index">
+                        <!-- <div
+                            key={emailItem}
+                            class="slds-box slds-box_xx-small slds-var-m-bottom_x-small slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                            <span class="slds-truncate slds-var-p-horizontal_x-small">{emailItem}</span>
+                            <lightning-button-icon
+								label="Remove"
+                                icon-name="utility:close"
+                                alternative-text="Remove"
+                                variant="border-filled"
+                                size="small"
+								data-index={index}
+                                onclick={handleRemove}>
+                            </lightning-button-icon>
+                        </div> -->
+                        <div key={emailItem}>
+                             <c-email-tile onopenorclose={handleRemove} data-index={index} email={emailItem}></c-email-tile>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Bottom Action Footer Segment (Always Visible) -->
+            <div class="slds-var-m-top_large slds-grid slds-grid_align-end">
+                <lightning-button 
+                    label="Cancel" 
+                    onclick={closeShareModal} 
+                    class="slds-var-m-right_x-small">
+                </lightning-button>
+                <lightning-button 
+                    label="Send Email" 
+                    variant="brand" 
+                    onclick={handleSendEmail}
+				>
+                </lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

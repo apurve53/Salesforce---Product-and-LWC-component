@@ -1,0 +1,11 @@
+<template>
+	<!-- Add slds-wrap so it goes to the next line after 3 cards -->
+	<div class="slds-grid slds-wrap slds-gutters">
+		<template for:each={products} for:item="product">
+			<!-- Apply the size here, wrapping the custom component -->
+			<div key={product.id} class="slds-col slds-size_1-of-3">
+				<c-product-tile onlikedislike={handleDispatch} product={product}></c-product-tile>
+			</div>
+		</template>
+	</div>
+</template>
