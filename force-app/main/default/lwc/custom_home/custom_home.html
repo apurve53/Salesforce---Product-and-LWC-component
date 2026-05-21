@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Current User Profile" icon-name="standard:user">
+        <div class="slds-var-m-around_medium">
+            <!-- Loading Spinner -->
+            <template if:false={userName}>
+                <lightning-spinner alternative-text="Loading user data..." size="small"></lightning-spinner>
+            </template>
+
+            <!-- User Data Display -->
+            <template if:true={userName}>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-var-m-bottom_small">
+                        <lightning-input label="User ID" value={userId} readonly></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-var-m-bottom_small">
+                        <lightning-input label="Full Name" value={userName} readonly></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-input label="Email Address" value={userEmail} readonly></lightning-input>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

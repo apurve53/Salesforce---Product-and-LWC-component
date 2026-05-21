@@ -1,0 +1,26 @@
+<template>
+	<div class="slds-m-around_medium">
+        <lightning-button 
+            label="Create New Case" 
+            icon-name="utility:add" 
+            variant="brand" 
+            onclick={navigateToCreateCase}>
+        </lightning-button>
+    </div>
+    <template if:true={cases}>
+        <template for:each={cases} for:item="caseItem">
+            <lightning-card
+                key={caseItem.Id}
+                title={caseItem.Subject}>
+                <div class="slds-p-around_medium">
+                    <!-- <p>
+                        Case #: {caseItem.Description}
+                    </p> -->
+                    <p>
+                        Status: {caseItem.Status}
+                    </p>
+                </div>
+            </lightning-card>
+        </template>
+    </template>
+</template>

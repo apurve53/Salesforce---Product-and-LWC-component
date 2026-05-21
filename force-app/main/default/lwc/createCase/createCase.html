@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Create Support Case">
+        <div class="wrapper">
+            <lightning-input
+                label="Subject"
+                value={subject}
+                onchange={handleSubject}
+                required>
+            </lightning-input>
+            <lightning-combobox
+                label="Priority"
+                value={priority}
+                options={priorityOptions}
+                onchange={handlePriority}>
+            </lightning-combobox>
+            <lightning-combobox
+                label="Category"
+                value={typeValue}
+                options={typeOptions}
+                onchange={handleType}>
+            </lightning-combobox>
+            <lightning-textarea
+                label="Description"
+                value={description}
+                onchange={handleDescription}
+                required>
+            </lightning-textarea>
+            <div class="buttonWrapper">
+                <lightning-button
+                    label="Create Case"
+                    variant="brand"
+                    onclick={handleCreateCase}
+                    disabled={loading}>
+                </lightning-button>
+            </div>
+            <template if:true={loading}>
+                <div class="spinnerWrapper">
+                    <lightning-spinner
+                        alternative-text="Creating Case"
+                        size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
