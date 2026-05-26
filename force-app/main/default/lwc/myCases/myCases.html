@@ -8,19 +8,41 @@
         </lightning-button>
     </div>
     <template if:true={cases}>
-        <template for:each={cases} for:item="caseItem">
-            <lightning-card
-                key={caseItem.Id}
-                title={caseItem.Subject}>
-                <div class="slds-p-around_medium">
-                    <!-- <p>
-                        Case #: {caseItem.Description}
-                    </p> -->
-                    <p>
-                        Status: {caseItem.Status}
-                    </p>
-                </div>
-            </lightning-card>
-        </template>
+        <div class="slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"><div class="slds-truncate" title="Case Number">Case Number</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Subject">Subject</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Priority">Priority</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Priority">Created Date</div></th>
+                        
+                        <th scope="col"><div class="slds-truncate" title="Action">Action</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={cases} for:item="caseItem">
+                        <tr key={caseItem.Id} class="slds-hint-parent">
+                            <td><div class="slds-truncate">{caseItem.CaseNumber}</div></td>
+                            <td><div class="slds-truncate">{caseItem.Subject}</div></td>
+                            <td><div class="slds-truncate">{caseItem.Status}</div></td>
+                            <td><div class="slds-truncate">{caseItem.Priority}</div></td>
+                            <td><div class="slds-truncate">{caseItem.CreatedDate}</div></td>
+                            <td>
+                                <!-- Row Click Action Button -->
+                                <lightning-button 
+                                    label="View" 
+                                    variant="brand-outline"
+                                    data-id={caseItem.Id} 
+                                    onclick={handleCaseClick}>
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
     </template>
 </template>
+

@@ -17,6 +17,22 @@ export default class MyCases extends NavigationMixin(LightningElement) {
 		});
 	}
 
+	handleCaseClick(event) {
+		// Gets the ID from the clicked button's data-id attribute
+		const caseId = event.target.dataset.id;
+		console.log('case Id : ', caseId);
+		// Navigates directly to the case record page
+		this[NavigationMixin.Navigate]({
+			type: 'comm__namedPage',
+			attributes: {
+				name: 'case_detail__c'
+			},
+			state: {
+				c__caseId: caseId
+			}
+		});
+	}
+
 	@wire(CurrentPageReference)
 	async getStateParameters(pageRef) {
 		const newRefreshValue = pageRef.state.c__refresh;
@@ -37,4 +53,6 @@ export default class MyCases extends NavigationMixin(LightningElement) {
 	connectedCallback() {
 		refreshApex(this.wiredCasesResult);
 	}
+
+
 }

@@ -1,0 +1,95 @@
+<template>
+	<div class="slds-grid slds-wrap slds-gutters slds-var-p-around_medium bg-container">
+		<!-- Left Panel: Case Details -->
+		<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+			<template if:true={caseRecord}>
+				<lightning-card title={caseRecord.Subject} icon-name="standard:case">
+					<div class="slds-var-p-around_medium">
+						<div class="slds-form-element slds-form-element_readonly slds-var-m-bottom_small">
+							<span class="slds-form-element__label">Case Number</span>
+							<div class="slds-form-element__control">
+								<div class="slds-form-element__static"><strong>{caseRecord.CaseNumber}</strong></div>
+							</div>
+						</div>
+						<div class="slds-form-element slds-form-element_readonly slds-var-m-bottom_small">
+							<span class="slds-form-element__label">Status</span>
+							<div class="slds-form-element__control">
+								<span class="slds-badge slds-theme_success">{caseRecord.Status}</span>
+							</div>
+						</div>
+						<div class="slds-form-element slds-form-element_readonly slds-var-m-bottom_small">
+							<span class="slds-form-element__label">Priority</span>
+							<div class="slds-form-element__control">
+								<div class="slds-form-element__static">{caseRecord.Priority}</div>
+							</div>
+						</div>
+						<div class="slds-form-element slds-form-element_readonly slds-var-m-bottom_small">
+							<span class="slds-form-element__label">Description</span>
+							<div class="slds-form-element__control">
+								<div class="slds-form-element__static">{caseRecord.Description}</div>
+							</div>
+						</div>
+					</div>
+					<div class="slds-var-m-around_medium">
+						<lightning-button 
+							label="Close Case" 
+							variant="brand"
+							onclick={handleCaseClose} 
+							class="slds-align_absolute-center">
+						</lightning-button>
+					</div>
+				</lightning-card>
+			</template>
+		</div>
+
+		<!-- Right Panel: Conversation Stream -->
+		<div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12">
+			<lightning-card title="Conversation Feed" icon-name="standard:messaging_user">
+				<div class="slds-var-p-around_medium chat-container">
+					<!-- Scrollable Chat History window -->
+					<div class="chat-scroller slds-scrollable_y slds-chat">
+						<ul class="slds-chat-list">
+							<template for:each={conversations} for:item="msg">
+								<li key={msg.id} class="slds-chat-listitem slds-chat-listitem_outbound">
+									<!-- Dynamic layout classes depending on sender -->
+									<div class="slds-chat-message">
+										<div class="slds-chat-message__body">
+											<div class={msg.chatClass}>
+												<span>{msg.body}</span>
+											</div>
+											<div class="slds-chat-message__meta">
+												{msg.senderName} • <lightning-formatted-date-time value={msg.createdDate} hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+											</div>
+										</div>
+									</div>
+								</li>
+							</template>
+						</ul>
+					</div>
+					<!-- Input Box -->
+					<div class="slds-var-m-top_medium">
+						<div class="slds-grid">
+							<div class="slds-col slds-grow">
+								<lightning-input 
+									type="text" 
+									variant="label-hidden" 
+									placeholder="Type your message here..." 
+									value={newMessage}
+									onchange={handleInputChange}
+									onkeydown={handleKeyDown}>
+								</lightning-input>
+							</div>
+							<div class="slds-col slds-no-flex slds-var-p-left_x-small">
+								<lightning-button 
+									label="Send" 
+									variant="brand" 
+									onclick={handleSend}>
+								</lightning-button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</lightning-card>
+		</div>
+	</div>
+</template>
