@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Send Certificate">
+        <div class="slds-var-p-around_medium">
+            <lightning-input type="file" label="Upload Certificate Template" accept=".html, .pdf, .doc, .docx" onchange={handleFileUpload}></lightning-input>
+            <br/>
+            <lightning-button label="Send Certificate" variant="brand" onclick={sendCertificate}></lightning-button>
+        </div>
+    </lightning-card>
+</template>
